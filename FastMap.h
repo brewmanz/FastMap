@@ -114,6 +114,8 @@ public:
     int constrainedMap(const int val);
     int lowerConstrainedMap(const int val);
     int upperConstrainedMap(const int val);
+
+    void Dump(Print* pPrint);
 private:
     int _in_min_incl, _in_max_excl, _out_min_incl, _out_max_excl;
     int _d_in, _d_out, _d_GCF;
@@ -163,6 +165,8 @@ public:
     long constrainedMap(const long val);
     long lowerConstrainedMap(const long val);
     long upperConstrainedMap(const long val);
+
+    void Dump(Print* pPrint);
 private:
     long _in_min_incl, _in_max_excl, _out_min_incl, _out_max_excl;
     long _d_in, _d_out, _d_GCF;

@@ -179,6 +179,41 @@ int FastMapInt::upperConstrainedMap(int value)
     return this->map(value);
 }
 
+void FastMapInt::Dump(Print* pPrint)
+{
+  pPrint->println(F("FastMapInt Dump:"));
+
+  pPrint->print(F("_in_min_incl:"));pPrint->print(_in_min_incl);
+  pPrint->print(F(", _in_max_excl:"));pPrint->print(_in_max_excl);
+  pPrint->print(F(", _out_min_incl:"));pPrint->print(_out_min_incl);
+  pPrint->print(F(", _out_max_excl:"));pPrint->print(_out_max_excl);
+  pPrint->println();
+
+  pPrint->print(F("_d_in:"));pPrint->print(_d_in);
+  pPrint->print(F(", _d_out:"));pPrint->print(_d_out);
+  pPrint->print(F(", _d_GCF:"));pPrint->print(_d_GCF);
+  pPrint->print(F(", _d_in_less1:"));pPrint->print(_d_in_less1);
+  pPrint->print(F(", _d_out_less1:"));pPrint->print(_d_out_less1);
+  pPrint->println();
+
+  pPrint->print(F("_d_FactorToMax8:"));pPrint->print(_d_FactorToMax8);
+  pPrint->print(F(", _d_FactorToMax16:"));pPrint->print(_d_FactorToMax16);
+  pPrint->print(F(", _d_FactorToMax32:"));pPrint->print(_d_FactorToMax32);
+  pPrint->println();
+
+  pPrint->print(F("[2]_fixedPoint88Fraction_Pos:"));pPrint->print(_fixedPoint88Fraction_Pos);pPrint->print(F(", 0x"));pPrint->print(_fixedPoint88Fraction_Pos, HEX);
+  pPrint->print(F(", Neg:"));pPrint->print(_fixedPoint88Fraction_Neg);pPrint->print(F(", _0x"));pPrint->print(_fixedPoint88Fraction_Neg, HEX);
+  pPrint->println();
+
+  pPrint->print(F("[4]_fixedPoint1616Fraction_Pos:"));pPrint->print(_fixedPoint1616Fraction_Pos);pPrint->print(F(", 0x"));pPrint->print(_fixedPoint1616Fraction_Pos, HEX);
+  pPrint->print(F(", Neg:"));pPrint->print(_fixedPoint1616Fraction_Neg);pPrint->print(F(", _0x"));pPrint->print(_fixedPoint1616Fraction_Neg, HEX);
+  pPrint->println();
+
+  pPrint->print(F("[8]_fixedPoint3232Fraction_Pos: 0x"));pPrint->print((int32_t)(_fixedPoint3232Fraction_Pos / 0x1000000000000), HEX);pPrint->print(F(" "));pPrint->print((int32_t)(_fixedPoint3232Fraction_Pos % 0x1000000000000), HEX);
+  pPrint->print(F(", Neg: 0x"));pPrint->print((int32_t)(_fixedPoint3232Fraction_Neg / 0x1000000000000), HEX);pPrint->print(F(" "));pPrint->print((int32_t)(_fixedPoint3232Fraction_Neg % 0x1000000000000), HEX);
+  pPrint->println();
+}
+
 FastMapLong::FastMapLong()
 {
     init(0, 1, 0, 1);
@@ -244,6 +279,41 @@ long FastMapLong::upperConstrainedMap(long value)
 {
     if (value >= _in_max_excl) return _out_max_excl - 1;
     return this->map(value);
+}
+
+void FastMapLong::Dump(Print* pPrint)
+{
+  pPrint->println(F("FastMapLong Dump:"));
+
+  pPrint->print(F("_in_min_incl:"));pPrint->print(_in_min_incl);
+  pPrint->print(F(", _in_max_excl:"));pPrint->print(_in_max_excl);
+  pPrint->print(F(", _out_min_incl:"));pPrint->print(_out_min_incl);
+  pPrint->print(F(", _out_max_excl:"));pPrint->print(_out_max_excl);
+  pPrint->println();
+
+  pPrint->print(F("_d_in:"));pPrint->print(_d_in);
+  pPrint->print(F(", _d_out:"));pPrint->print(_d_out);
+  pPrint->print(F(", _d_GCF:"));pPrint->print(_d_GCF);
+  pPrint->print(F(", _d_in_less1:"));pPrint->print(_d_in_less1);
+  pPrint->print(F(", _d_out_less1:"));pPrint->print(_d_out_less1);
+  pPrint->println();
+
+  pPrint->print(F("_d_FactorToMax8:"));pPrint->print(_d_FactorToMax8);
+  pPrint->print(F(", _d_FactorToMax16:"));pPrint->print(_d_FactorToMax16);
+  pPrint->print(F(", _d_FactorToMax32:"));pPrint->print(_d_FactorToMax32);
+  pPrint->println();
+
+  pPrint->print(F("[2]_fixedPoint88Fraction_Pos:"));pPrint->print(_fixedPoint88Fraction_Pos);pPrint->print(F(", 0x"));pPrint->print(_fixedPoint88Fraction_Pos, HEX);
+  pPrint->print(F(", Neg:"));pPrint->print(_fixedPoint88Fraction_Neg);pPrint->print(F(", _0x"));pPrint->print(_fixedPoint88Fraction_Neg, HEX);
+  pPrint->println();
+
+  pPrint->print(F("[4]_fixedPoint1616Fraction_Pos:"));pPrint->print(_fixedPoint1616Fraction_Pos);pPrint->print(F(", 0x"));pPrint->print(_fixedPoint1616Fraction_Pos, HEX);
+  pPrint->print(F(", Neg:"));pPrint->print(_fixedPoint1616Fraction_Neg);pPrint->print(F(", _0x"));pPrint->print(_fixedPoint1616Fraction_Neg, HEX);
+  pPrint->println();
+
+  pPrint->print(F("[8]_fixedPoint3232Fraction_Pos: 0x"));pPrint->print((int32_t)(_fixedPoint3232Fraction_Pos / 0x1000000000000), HEX);pPrint->print(F(" "));pPrint->print((int32_t)(_fixedPoint3232Fraction_Pos % 0x1000000000000), HEX);
+  pPrint->print(F(", Neg: 0x"));pPrint->print((int32_t)(_fixedPoint3232Fraction_Neg / 0x1000000000000), HEX);pPrint->print(F(" "));pPrint->print((int32_t)(_fixedPoint3232Fraction_Neg % 0x1000000000000), HEX);
+  pPrint->println();
 }
 
 int8_t Multiply8ByFixedPointFraction88(int8_t factor, int16_t fixedPointFraction){
