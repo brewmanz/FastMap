@@ -12,7 +12,6 @@
 
 volatile int i, j;
 
-
 test(T1186Multiply16ByFixedPointFraction1616_5DivM9_Neg) {
   int32_t FPF;
   Ratio16ToFixedPointFraction1616(5, -9, nullptr, &FPF);
@@ -40,6 +39,23 @@ test(T1186Multiply16ByFixedPointFraction1616_5DivM9_Neg) {
   assertEqual(Multiply16ByFixedPointFraction1616(-7000, FPF), 3889);
   assertEqual(Multiply16ByFixedPointFraction1616(-8000, FPF), 4445);
   assertEqual(Multiply16ByFixedPointFraction1616(-9000, FPF), 5000);
+
+  int failed = 0;
+  for(int16_t ix = 0; ix > INT16_MIN / 2; --ix){
+    int16_t expVal = -(((ix * 5L) - 8) / 9);
+    int16_t actVal = Multiply16ByFixedPointFraction1616(ix, FPF);
+    if(expVal != actVal){
+      ++failed;
+      if(failed < 20) {
+        Serial.print(F("ix="));Serial.print(ix);
+        Serial.print(F("\texp="));Serial.print(expVal);
+        Serial.print(F("\tact="));Serial.print(actVal);
+        Serial.print(F("\tdiff="));Serial.print(actVal - expVal);
+        Serial.println();
+      }
+    }
+  }
+  assertEqual(failed, 0);
 }
 test(T1185Multiply16ByFixedPointFraction1616_5DivM9_Pos) {
   int32_t FPF;
@@ -68,6 +84,23 @@ test(T1185Multiply16ByFixedPointFraction1616_5DivM9_Pos) {
   assertEqual(Multiply16ByFixedPointFraction1616(7000, FPF), -3888);
   assertEqual(Multiply16ByFixedPointFraction1616(8000, FPF), -4444);
   assertEqual(Multiply16ByFixedPointFraction1616(9000, FPF), -5000);
+
+  int failed = 0;
+  for(int16_t ix = 0; ix < INT16_MAX / 2; ++ix){
+    int16_t expVal = -(((ix * 5L) - 0) / 9);
+    int16_t actVal = Multiply16ByFixedPointFraction1616(ix, FPF);
+    if(expVal != actVal){
+      ++failed;
+      if(failed < 20) {
+        Serial.print(F("ix="));Serial.print(ix);
+        Serial.print(F("\texp="));Serial.print(expVal);
+        Serial.print(F("\tact="));Serial.print(actVal);
+        Serial.print(F("\tdiff="));Serial.print(actVal - expVal);
+        Serial.println();
+      }
+    }
+  }
+  assertEqual(failed, 0);
 }
 test(T1181Multiply16ByFixedPointFraction1616_5Div9_Neg) {
   int32_t FPF;
@@ -96,6 +129,23 @@ test(T1181Multiply16ByFixedPointFraction1616_5Div9_Neg) {
   assertEqual(Multiply16ByFixedPointFraction1616(-7000, FPF), -3889);
   assertEqual(Multiply16ByFixedPointFraction1616(-8000, FPF), -4445);
   assertEqual(Multiply16ByFixedPointFraction1616(-9000, FPF), -5000);
+
+  int failed = 0;
+  for(int16_t ix = 0; ix > INT16_MIN / 2; --ix){
+    int16_t expVal = (((ix * 5L) - 8) / 9);
+    int16_t actVal = Multiply16ByFixedPointFraction1616(ix, FPF);
+    if(expVal != actVal){
+      ++failed;
+      if(failed < 20) {
+        Serial.print(F("ix="));Serial.print(ix);
+        Serial.print(F("\texp="));Serial.print(expVal);
+        Serial.print(F("\tact="));Serial.print(actVal);
+        Serial.print(F("\tdiff="));Serial.print(actVal - expVal);
+        Serial.println();
+      }
+    }
+  }
+  assertEqual(failed, 0);
 }
 test(T1180Multiply16ByFixedPointFraction1616_5Div9_Pos) {
   int32_t FPF;
@@ -124,6 +174,23 @@ test(T1180Multiply16ByFixedPointFraction1616_5Div9_Pos) {
   assertEqual(Multiply16ByFixedPointFraction1616(7000, FPF), 3888);
   assertEqual(Multiply16ByFixedPointFraction1616(8000, FPF), 4444);
   assertEqual(Multiply16ByFixedPointFraction1616(9000, FPF), 5000);
+
+  int failed = 0;
+  for(int16_t ix = 0; ix < INT16_MAX / 2; ++ix){
+    int16_t expVal = (((ix * 5L) - 0) / 9);
+    int16_t actVal = Multiply16ByFixedPointFraction1616(ix, FPF);
+    if(expVal != actVal){
+      ++failed;
+      if(failed < 20) {
+        Serial.print(F("ix="));Serial.print(ix);
+        Serial.print(F("\texp="));Serial.print(expVal);
+        Serial.print(F("\tact="));Serial.print(actVal);
+        Serial.print(F("\tdiff="));Serial.print(actVal - expVal);
+        Serial.println();
+      }
+    }
+  }
+  assertEqual(failed, 0);
 }
 
 test(T1176Multiply16ByFixedPointFraction1616_1DivM3_Neg) {
@@ -153,6 +220,23 @@ test(T1176Multiply16ByFixedPointFraction1616_1DivM3_Neg) {
   assertEqual(Multiply16ByFixedPointFraction1616(-7000, FPF), 2334);
   assertEqual(Multiply16ByFixedPointFraction1616(-8000, FPF), 2667);
   assertEqual(Multiply16ByFixedPointFraction1616(-9000, FPF), 3000);
+
+  int failed = 0;
+  for(int16_t ix = 0; ix > INT16_MIN / 2; --ix){
+    int16_t expVal = -(((ix * 1L) - 2) / 3);
+    int16_t actVal = Multiply16ByFixedPointFraction1616(ix, FPF);
+    if(expVal != actVal){
+      ++failed;
+      if(failed < 20) {
+        Serial.print(F("ix="));Serial.print(ix);
+        Serial.print(F("\texp="));Serial.print(expVal);
+        Serial.print(F("\tact="));Serial.print(actVal);
+        Serial.print(F("\tdiff="));Serial.print(actVal - expVal);
+        Serial.println();
+      }
+    }
+  }
+  assertEqual(failed, 0);
 }
 test(T1175Multiply16ByFixedPointFraction1616_1DivM3_Pos) {
   int32_t FPF;
@@ -181,6 +265,23 @@ test(T1175Multiply16ByFixedPointFraction1616_1DivM3_Pos) {
   assertEqual(Multiply16ByFixedPointFraction1616(7000, FPF), -2333);
   assertEqual(Multiply16ByFixedPointFraction1616(8000, FPF), -2666);
   assertEqual(Multiply16ByFixedPointFraction1616(9000, FPF), -3000);
+
+  int failed = 0;
+  for(int16_t ix = 0; ix < INT16_MAX / 2; ++ix){
+    int16_t expVal = -(((ix * 1) - 0) / 3);
+    int16_t actVal = Multiply16ByFixedPointFraction1616(ix, FPF);
+    if(expVal != actVal){
+      ++failed;
+      if(failed < 20) {
+        Serial.print(F("ix="));Serial.print(ix);
+        Serial.print(F("\texp="));Serial.print(expVal);
+        Serial.print(F("\tact="));Serial.print(actVal);
+        Serial.print(F("\tdiff="));Serial.print(actVal - expVal);
+        Serial.println();
+      }
+    }
+  }
+  assertEqual(failed, 0);
 }
 test(T1171Multiply16ByFixedPointFraction1616_1Div3_Neg) {
   int32_t FPF;
@@ -209,6 +310,23 @@ test(T1171Multiply16ByFixedPointFraction1616_1Div3_Neg) {
   assertEqual(Multiply16ByFixedPointFraction1616(-7000, FPF), -2334);
   assertEqual(Multiply16ByFixedPointFraction1616(-8000, FPF), -2667);
   assertEqual(Multiply16ByFixedPointFraction1616(-9000, FPF), -3000);
+
+  int failed = 0;
+  for(int16_t ix = 0; ix > INT16_MIN / 2; --ix){
+    int16_t expVal = (((ix * 1L) - 2) / 3);
+    int16_t actVal = Multiply16ByFixedPointFraction1616(ix, FPF);
+    if(expVal != actVal){
+      ++failed;
+      if(failed < 20) {
+        Serial.print(F("ix="));Serial.print(ix);
+        Serial.print(F("\texp="));Serial.print(expVal);
+        Serial.print(F("\tact="));Serial.print(actVal);
+        Serial.print(F("\tdiff="));Serial.print(actVal - expVal);
+        Serial.println();
+      }
+    }
+  }
+  assertEqual(failed, 0);
 }
 test(T1170Multiply16ByFixedPointFraction1616_1Div3_Pos) {
   int32_t FPF;
@@ -237,6 +355,23 @@ test(T1170Multiply16ByFixedPointFraction1616_1Div3_Pos) {
   assertEqual(Multiply16ByFixedPointFraction1616(7000, FPF), 2333);
   assertEqual(Multiply16ByFixedPointFraction1616(8000, FPF), 2666);
   assertEqual(Multiply16ByFixedPointFraction1616(9000, FPF), 3000);
+
+  int failed = 0;
+  for(int16_t ix = 0; ix < INT16_MAX / 2; ++ix){
+    int16_t expVal = (((ix * 1) - 0) / 3);
+    int16_t actVal = Multiply16ByFixedPointFraction1616(ix, FPF);
+    if(expVal != actVal){
+      ++failed;
+      if(failed < 20) {
+        Serial.print(F("ix="));Serial.print(ix);
+        Serial.print(F("\texp="));Serial.print(expVal);
+        Serial.print(F("\tact="));Serial.print(actVal);
+        Serial.print(F("\tdiff="));Serial.print(actVal - expVal);
+        Serial.println();
+      }
+    }
+  }
+  assertEqual(failed, 0);
 }
 
 test(T1166Multiply16ByFixedPointFraction1616_1DivM4_Neg) {
@@ -266,6 +401,23 @@ test(T1166Multiply16ByFixedPointFraction1616_1DivM4_Neg) {
   assertEqual(Multiply16ByFixedPointFraction1616(-7000, FPF), 1750);
   assertEqual(Multiply16ByFixedPointFraction1616(-8000, FPF), 2000);
   assertEqual(Multiply16ByFixedPointFraction1616(-9000, FPF), 2250);
+
+  int failed = 0;
+  for(int16_t ix = 0; ix > INT16_MIN / 2; --ix){
+    int16_t expVal = -(((ix * 1L) - 3) / 4);
+    int16_t actVal = Multiply16ByFixedPointFraction1616(ix, FPF);
+    if(expVal != actVal){
+      ++failed;
+      if(failed < 20) {
+        Serial.print(F("ix="));Serial.print(ix);
+        Serial.print(F("\texp="));Serial.print(expVal);
+        Serial.print(F("\tact="));Serial.print(actVal);
+        Serial.print(F("\tdiff="));Serial.print(actVal - expVal);
+        Serial.println();
+      }
+    }
+  }
+  assertEqual(failed, 0);
 }
 test(T1165Multiply16ByFixedPointFraction1616_1DivM4_Pos) {
   int32_t FPF;
@@ -294,6 +446,23 @@ test(T1165Multiply16ByFixedPointFraction1616_1DivM4_Pos) {
   assertEqual(Multiply16ByFixedPointFraction1616(7000, FPF), -1750);
   assertEqual(Multiply16ByFixedPointFraction1616(8000, FPF), -2000);
   assertEqual(Multiply16ByFixedPointFraction1616(9000, FPF), -2250);
+
+  int failed = 0;
+  for(int16_t ix = 0; ix < INT16_MAX / 2; ++ix){
+    int16_t expVal = -(((ix * 1) - 0) / 4);
+    int16_t actVal = Multiply16ByFixedPointFraction1616(ix, FPF);
+    if(expVal != actVal){
+      ++failed;
+      if(failed < 20) {
+        Serial.print(F("ix="));Serial.print(ix);
+        Serial.print(F("\texp="));Serial.print(expVal);
+        Serial.print(F("\tact="));Serial.print(actVal);
+        Serial.print(F("\tdiff="));Serial.print(actVal - expVal);
+        Serial.println();
+      }
+    }
+  }
+  assertEqual(failed, 0);
 }
 test(T1161Multiply16ByFixedPointFraction1616_1Div4_Neg) {
   int32_t FPF;
@@ -322,6 +491,23 @@ test(T1161Multiply16ByFixedPointFraction1616_1Div4_Neg) {
   assertEqual(Multiply16ByFixedPointFraction1616(-7000, FPF), -1750);
   assertEqual(Multiply16ByFixedPointFraction1616(-8000, FPF), -2000);
   assertEqual(Multiply16ByFixedPointFraction1616(-9000, FPF), -2250);
+
+  int failed = 0;
+  for(int16_t ix = 0; ix > INT16_MIN / 2; --ix){
+    int16_t expVal = (((ix * 1L) - 3) / 4);
+    int16_t actVal = Multiply16ByFixedPointFraction1616(ix, FPF);
+    if(expVal != actVal){
+      ++failed;
+      if(failed < 20) {
+        Serial.print(F("ix="));Serial.print(ix);
+        Serial.print(F("\texp="));Serial.print(expVal);
+        Serial.print(F("\tact="));Serial.print(actVal);
+        Serial.print(F("\tdiff="));Serial.print(actVal - expVal);
+        Serial.println();
+      }
+    }
+  }
+  assertEqual(failed, 0);
 }
 test(T1160Multiply16ByFixedPointFraction1616_1Div4_Pos) {
   int32_t FPF;
@@ -350,6 +536,23 @@ test(T1160Multiply16ByFixedPointFraction1616_1Div4_Pos) {
   assertEqual(Multiply16ByFixedPointFraction1616(7000, FPF), 1750);
   assertEqual(Multiply16ByFixedPointFraction1616(8000, FPF), 2000);
   assertEqual(Multiply16ByFixedPointFraction1616(9000, FPF), 2250);
+
+  int failed = 0;
+  for(int16_t ix = 0; ix < INT16_MAX / 2; ++ix){
+    int16_t expVal = (((ix * 1L) - 0) / 4);
+    int16_t actVal = Multiply16ByFixedPointFraction1616(ix, FPF);
+    if(expVal != actVal){
+      ++failed;
+      if(failed < 20) {
+        Serial.print(F("ix="));Serial.print(ix);
+        Serial.print(F("\texp="));Serial.print(expVal);
+        Serial.print(F("\tact="));Serial.print(actVal);
+        Serial.print(F("\tdiff="));Serial.print(actVal - expVal);
+        Serial.println();
+      }
+    }
+  }
+  assertEqual(failed, 0);
 }
 
 test(T1150Ratio16ToFixedPointFraction1616) {

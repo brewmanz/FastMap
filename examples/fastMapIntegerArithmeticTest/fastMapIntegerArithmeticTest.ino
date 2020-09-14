@@ -104,6 +104,34 @@ test(T0100DivRounding) {
 
   i = -19; j = -5;
   assertEqual(i / j, 3);
+
+  assertEqual(0 / 4, 0);
+
+  assertEqual(1 / 4, 0);
+  assertEqual(2 / 4, 0);
+  assertEqual(3 / 4, 0);
+  assertEqual(4 / 4, 1);
+  assertEqual(5 / 4, 1);
+  
+  assertEqual(-1 / 4, 0);
+  assertEqual(-2 / 4, 0);
+  assertEqual(-3 / 4, 0);
+  assertEqual(-4 / 4, -1);
+  assertEqual(-5 / 4, -1);
+
+  assertEqual(0 / -4, 0);
+
+  assertEqual(1 / -4, 0);
+  assertEqual(2 / -4, 0);
+  assertEqual(3 / -4, 0);
+  assertEqual(4 / -4, -1);
+  assertEqual(5 / -4, -1);
+  
+  assertEqual(-1 / -4, 0);
+  assertEqual(-2 / -4, 0);
+  assertEqual(-3 / -4, 0);
+  assertEqual(-4 / -4, 1);
+  assertEqual(-5 / -4, 1);
 }
 
 test(T0000SanitySizes) {
