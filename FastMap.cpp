@@ -105,23 +105,19 @@ double FastMapDouble::upperConstrainedMap(double value)
 void FixedPointFraction16_t::Dump(Print* pPrint){
   pPrint->print(F("FixedPointFraction16_t Dump:<"));
   pPrint->print(F("F:"));pPrint->print(TheFraction, DEC);pPrint->print(F("=0x"));pPrint->print(TheFraction, HEX);
-  pPrint->print(F(", B:"));pPrint->println(BitsToShift, DEC);
+  pPrint->print(F(", B:"));pPrint->print(BitsToShift, DEC);
   pPrint->print(F(">"));
-  //pPrint->print(F("[8]_fixedPoint64Fraction_Pos: 0x"));pPrint->print((int32_t)(_fixedPoint64Fraction_Pos / 0x1000000000000), HEX);pPrint->print(F(" "));pPrint->print((int32_t)(_fixedPoint64Fraction_Pos % 0x1000000000000), HEX);
-  //pPrint->print(F(", Neg: 0x"));pPrint->print((int32_t)(_fixedPoint64Fraction_Neg / 0x1000000000000), HEX);pPrint->print(F(" "));pPrint->print((int32_t)(_fixedPoint64Fraction_Neg % 0x1000000000000), HEX);
 }
 void FixedPointFraction32_t::Dump(Print* pPrint){
   pPrint->print(F("FixedPointFraction32_t Dump:<"));
   pPrint->print(F("F:"));pPrint->print(TheFraction, DEC);pPrint->print(F("=0x"));pPrint->print(TheFraction, HEX);
-  pPrint->print(F(", B:"));pPrint->println(BitsToShift, DEC);
+  pPrint->print(F(", B:"));pPrint->print(BitsToShift, DEC);
   pPrint->print(F(">"));
-  //pPrint->print(F("[8]_fixedPoint64Fraction_Pos: 0x"));pPrint->print((int32_t)(_fixedPoint64Fraction_Pos / 0x1000000000000), HEX);pPrint->print(F(" "));pPrint->print((int32_t)(_fixedPoint64Fraction_Pos % 0x1000000000000), HEX);
-  //pPrint->print(F(", Neg: 0x"));pPrint->print((int32_t)(_fixedPoint64Fraction_Neg / 0x1000000000000), HEX);pPrint->print(F(" "));pPrint->print((int32_t)(_fixedPoint64Fraction_Neg % 0x1000000000000), HEX);
 }
 void FixedPointFraction64_t::Dump(Print* pPrint){
   pPrint->print(F("FixedPointFraction64_t Dump:<"));
   pPrint->print(F("F:=0x"));pPrint->print((int32_t)(TheFraction / 0x1000000000000), HEX);pPrint->print(F(" "));pPrint->print((int32_t)(TheFraction % 0x1000000000000), HEX);
-  pPrint->print(F(", B:"));pPrint->println(BitsToShift, DEC);
+  pPrint->print(F(", B:"));pPrint->print(BitsToShift, DEC);
   pPrint->print(F(">"));
 }
 
@@ -171,16 +167,6 @@ void FastMapInt::init(const int in_min_incl, const int in_max_excl, const int ou
   Ratio8ToFixedPointFraction16(_d_out, _d_in, &_fixedPoint16Fraction_Pos, &_fixedPoint16Fraction_Neg);
   Ratio16ToFixedPointFraction32(_d_out, _d_in, &_fixedPoint32Fraction_Pos, &_fixedPoint32Fraction_Neg);
   Ratio32ToFixedPointFraction64(_d_out, _d_in, &_fixedPoint64Fraction_Pos, &_fixedPoint64Fraction_Neg);
-
-#if 0 // DEBUG help
-Serial.print("_d_in=");Serial.print(_d_in, DEC);Serial.print(", _d_out=");Serial.print(_d_out, DEC);Serial.print(", _d_GCF=");Serial.println(_d_GCF, DEC);
-Serial.print("f8=");Serial.print(factor8, 6);Serial.print(", f16=");Serial.print(factor16, 6);Serial.print(", f32=");Serial.println(factor32, 6);
-Serial.print("__INT8_MAX__=");Serial.print(__INT8_MAX__, DEC);Serial.print(", __INT16_MAX__=");Serial.print(__INT16_MAX__, DEC);Serial.print(", __INT32_MAX__=");Serial.println(__INT32_MAX__, DEC);
-Serial.print("M8=");Serial.print(_d_FactorToMax8, DEC);Serial.print(", M16=");Serial.print(_d_FactorToMax16, DEC);Serial.print(", M32=");Serial.println(_d_FactorToMax32, DEC);
-Serial.print("R16P=");Serial.print(_fixedPoint16Fraction_Pos / 256.0, 3);Serial.print(", R16N=");Serial.print(_fixedPoint16Fraction_Neg / 256.0, 3);
-Serial.print(", R32P=");Serial.print(_fixedPoint32Fraction_Pos / 65536.0, 3);Serial.print(", R32N=");Serial.print(_fixedPoint32Fraction_Neg / 65536.0, 3);
-Serial.print(", R64P=");Serial.print(_fixedPoint64Fraction_Pos / 4294967296.0, 3);Serial.print(", R64N=");Serial.println(_fixedPoint64Fraction_Neg / 4294967296.0, 3);
-#endif
 }
 
 int FastMapInt::constrainedMap(int value)
@@ -340,7 +326,7 @@ void FastMapLong::Dump(Print* pPrint)
   pPrint->println();
 }
 
-int8_t Multiply8ByFixedPointFraction16(int8_t factor, const FixedPointFraction16_t* pFixedPointFraction){
+int8_t Multiply8ByFixedPointFraction16(int8_t factor, const FixedPointFraction16_t* pFixedPointFraction, Print* pPrintDebug){
   if(factor == 0 || pFixedPointFraction == nullptr || pFixedPointFraction->TheFraction == 0) { return 0; }
   FixedPointFraction16_t fixedPointFraction = *pFixedPointFraction;
   bool bFPFNeg = fixedPointFraction.TheFraction < 0;
@@ -352,7 +338,7 @@ int8_t Multiply8ByFixedPointFraction16(int8_t factor, const FixedPointFraction16
   res >>= fixedPointFraction.BitsToShift;
   return bFPFNeg ? -res : res;
 }
-int16_t Multiply16ByFixedPointFraction32(int16_t factor, const FixedPointFraction32_t* pFixedPointFraction){
+int16_t Multiply16ByFixedPointFraction32(int16_t factor, const FixedPointFraction32_t* pFixedPointFraction, Print* pPrintDebug){
   if(factor == 0 || pFixedPointFraction == nullptr || pFixedPointFraction->TheFraction == 0) { return 0; }
   FixedPointFraction32_t fixedPointFraction = *pFixedPointFraction;
   bool bFPFNeg = fixedPointFraction.TheFraction < 0;
@@ -364,7 +350,7 @@ int16_t Multiply16ByFixedPointFraction32(int16_t factor, const FixedPointFractio
   res >>= fixedPointFraction.BitsToShift;
   return bFPFNeg ? -res : res;
 }
-int32_t Multiply32ByFixedPointFraction64(int32_t factor, const FixedPointFraction64_t* pFixedPointFraction){
+int32_t Multiply32ByFixedPointFraction64(int32_t factor, const FixedPointFraction64_t* pFixedPointFraction, Print* pPrintDebug){
   if(factor == 0 || pFixedPointFraction == nullptr || pFixedPointFraction->TheFraction == 0) { return 0; }
   FixedPointFraction64_t fixedPointFraction = *pFixedPointFraction;
   bool bFPFNeg = fixedPointFraction.TheFraction < 0;
@@ -377,7 +363,7 @@ int32_t Multiply32ByFixedPointFraction64(int32_t factor, const FixedPointFractio
   return bFPFNeg ? -res : res;
 }
 
-int64_t Multiply64ByFixedPointFraction64(int64_t factor, const FixedPointFraction64_t* pFixedPointFraction){
+int64_t Multiply64ByFixedPointFraction64(int64_t factor, const FixedPointFraction64_t* pFixedPointFraction, Print* pPrintDebug){
   if(factor == 0 || pFixedPointFraction == nullptr || pFixedPointFraction->TheFraction == 0) { return 0; }
   FixedPointFraction64_t fixedPointFraction = *pFixedPointFraction;
   bool bFPFNeg = fixedPointFraction.TheFraction < 0;
@@ -391,74 +377,117 @@ int64_t Multiply64ByFixedPointFraction64(int64_t factor, const FixedPointFractio
 }
 
 // we need two fractions, depending on whether we're multiplying a +ve or -ve factor later
-void Ratio8ToFixedPointFraction16(int8_t numerator, int8_t denominator, FixedPointFraction16_t* poutFixedPointFraction_Pos, FixedPointFraction16_t* poutFixedPointFraction_Neg){
-  FixedPointFraction16_t resP, resN;
+void Ratio8ToFixedPointFraction16(int8_t numerator, int8_t denominator, FixedPointFraction16_t* poutFixedPointFraction_Pos, FixedPointFraction16_t* poutFixedPointFraction_Neg, Print* pPrintDebug){
+  if(pPrintDebug) { pPrintDebug->print(F(",N="));pPrintDebug->print(numerator);pPrintDebug->print(F(",D="));pPrintDebug->print(denominator);}
+  FixedPointFraction16_t resP {0, 0}, resN {0, 0};
   if(numerator != 0 && denominator != 0) {
     resP.TheFraction = numerator;
     resP.BitsToShift = 8;
     resP.TheFraction <<= resP.BitsToShift;
-    resN = resP;
     // round slightly to help truncated fraction for +ve numbers
     int8_t rounding = abs(denominator) - 1;
+    // wait! Can we squeeze extra bits of precision?
+    while(abs(resP.TheFraction) < 0x3FFF) {
+      if(pPrintDebug) { pPrintDebug->print(F(",Shift"));}
+      resP.TheFraction <<= 1;
+      ++resP.BitsToShift;
+    }
+
+    resN = resP;
     resP.TheFraction += resP.TheFraction > 0 ? rounding : -rounding;
     resP.TheFraction /= denominator;
     resN.TheFraction /= denominator; // always need to round down for -ve numbers
   }
+  if(pPrintDebug) { pPrintDebug->print(F(",+="));resP.Dump(pPrintDebug);pPrintDebug->print(F(",-="));resN.Dump(pPrintDebug);}
+
   if(poutFixedPointFraction_Pos) { *poutFixedPointFraction_Pos = resP; }
   if(poutFixedPointFraction_Neg) { *poutFixedPointFraction_Neg = resN; }
 }
 
 // we need two fractions, depending on whether we're multiplying a +ve or -ve factor later
-void Ratio16ToFixedPointFraction32(int16_t numerator, int16_t denominator, FixedPointFraction32_t* poutFixedPointFraction_Pos, FixedPointFraction32_t* poutFixedPointFraction_Neg){
-  FixedPointFraction32_t resP, resN;
+void Ratio16ToFixedPointFraction32(int16_t numerator, int16_t denominator, FixedPointFraction32_t* poutFixedPointFraction_Pos, FixedPointFraction32_t* poutFixedPointFraction_Neg, Print* pPrintDebug){
+  if(pPrintDebug) { pPrintDebug->print(F(",N="));pPrintDebug->print(numerator);pPrintDebug->print(F(",D="));pPrintDebug->print(denominator);}
+  FixedPointFraction32_t resP {0, 0}, resN {0, 0};
   if(numerator != 0 && denominator != 0) {
     resP.TheFraction = numerator;
     resP.BitsToShift = 16;
     resP.TheFraction <<= resP.BitsToShift;
-    resN = resP;
     // round slightly to help truncated fraction for +ve numbers
     int16_t rounding = abs(denominator) - 1;
+
+    // wait! Can we squeeze extra bits of precision?
+    while(abs(resP.TheFraction) < 0x3FFFFFFF) {
+      if(pPrintDebug) { pPrintDebug->print(F(",Shift"));}
+      resP.TheFraction <<= 1;
+      ++resP.BitsToShift;
+    }
+
+    resN = resP;
     resP.TheFraction += resP.TheFraction > 0 ? rounding : -rounding;
     resP.TheFraction /= denominator;
     resN.TheFraction /= denominator; // always need to round down for -ve numbers
   }
+  if(pPrintDebug) { pPrintDebug->print(F(",+="));resP.Dump(pPrintDebug);pPrintDebug->print(F(",-="));resN.Dump(pPrintDebug);}
+
   if(poutFixedPointFraction_Pos) { *poutFixedPointFraction_Pos = resP; }
   if(poutFixedPointFraction_Neg) { *poutFixedPointFraction_Neg = resN; }
 }
 
 // we need two fractions, depending on whether we're multiplying a +ve or -ve factor later
-void Ratio32ToFixedPointFraction64(int32_t numerator, int32_t denominator, FixedPointFraction64_t* poutFixedPointFraction_Pos, FixedPointFraction64_t* poutFixedPointFraction_Neg){
-  FixedPointFraction64_t resP, resN;
+void Ratio32ToFixedPointFraction64(int32_t numerator, int32_t denominator, FixedPointFraction64_t* poutFixedPointFraction_Pos, FixedPointFraction64_t* poutFixedPointFraction_Neg, Print* pPrintDebug){
+  if(pPrintDebug) { pPrintDebug->print(F(",N="));pPrintDebug->print(numerator);pPrintDebug->print(F(",D="));pPrintDebug->print(denominator);}
+  FixedPointFraction64_t resP {0, 0}, resN {0, 0};
   if(numerator != 0 && denominator != 0) {
     resP.TheFraction = numerator;
     resP.BitsToShift = 32;
     resP.TheFraction <<= resP.BitsToShift;
-    resN = resP;
     // round slightly to help truncated fraction for +ve numbers
     int32_t rounding = abs(denominator) - 1;
+
+    // wait! Can we squeeze extra bits of precision?
+    while(abs(resP.TheFraction) < 0x3FFFFFFFFFFFFFFF) {
+      if(pPrintDebug) { pPrintDebug->print(F(",Shift"));}
+      resP.TheFraction <<= 1;
+      ++resP.BitsToShift;
+    }
+
+    resN = resP;
     resP.TheFraction += resP.TheFraction > 0 ? rounding : -rounding;
     resP.TheFraction /= denominator;
     resN.TheFraction /= denominator; // always need to round down for -ve numbers
   }
+  if(pPrintDebug) { pPrintDebug->print(F(",+="));resP.Dump(pPrintDebug);pPrintDebug->print(F(",-="));resN.Dump(pPrintDebug);}
+
   if(poutFixedPointFraction_Pos) { *poutFixedPointFraction_Pos = resP; }
   if(poutFixedPointFraction_Neg) { *poutFixedPointFraction_Neg = resN; }
 }
 
 // we need two fractions, depending on whether we're multiplying a +ve or -ve factor later
 // COMPROMISE s/b Ratio64ToFixedPointFraction6464
-void Ratio64ToFixedPointFraction64(int64_t numerator, int64_t denominator, FixedPointFraction64_t* poutFixedPointFraction_Pos, FixedPointFraction64_t* poutFixedPointFraction_Neg){
-  FixedPointFraction64_t resP, resN;
+void Ratio64ToFixedPointFraction64(int64_t numerator, int64_t denominator, FixedPointFraction64_t* poutFixedPointFraction_Pos, FixedPointFraction64_t* poutFixedPointFraction_Neg, Print* pPrintDebug){
+  if(pPrintDebug) { pPrintDebug->print(F(",N32="));pPrintDebug->print((int32_t)numerator);pPrintDebug->print(F(",D32="));pPrintDebug->print((int32_t)denominator);}
+  FixedPointFraction64_t resP {0, 0}, resN {0, 0};
   if(numerator != 0 && denominator != 0) {
     resP.TheFraction = numerator;
     resP.BitsToShift = 32;
     resP.TheFraction <<= resP.BitsToShift;
-    resN = resP;
     // round slightly to help truncated fraction for +ve numbers
     int32_t rounding = abs(denominator) - 1;
+
+    // wait! Can we squeeze extra bits of precision?
+    while(abs(resP.TheFraction) < 0x3FFFFFFFFFFFFFFF) {
+      if(pPrintDebug) { pPrintDebug->print(F(",Shift"));}
+      resP.TheFraction <<= 1;
+      ++resP.BitsToShift;
+    }
+
+    resN = resP;
     resP.TheFraction += resP.TheFraction > 0 ? rounding : -rounding;
     resP.TheFraction /= denominator;
     resN.TheFraction /= denominator; // always need to round down for -ve numbers
   }
+  if(pPrintDebug) { pPrintDebug->print(F(",+="));resP.Dump(pPrintDebug);pPrintDebug->print(F(",-="));resN.Dump(pPrintDebug);}
+
   if(poutFixedPointFraction_Pos) { *poutFixedPointFraction_Pos = resP; }
   if(poutFixedPointFraction_Neg) { *poutFixedPointFraction_Neg = resN; }
 }
