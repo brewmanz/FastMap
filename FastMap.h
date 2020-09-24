@@ -60,16 +60,19 @@ private:
 struct FixedPointFraction16_t {
   int16_t TheFraction;
   int16_t BitsToShift;
+  int8_t MaxInput;
   void Dump(Print* pPrint);
 };
 struct FixedPointFraction32_t {
   int32_t TheFraction;
   int16_t BitsToShift;
+  int16_t MaxInput;
   void Dump(Print* pPrint);
 };
 struct FixedPointFraction64_t {
   int64_t TheFraction;
   int16_t BitsToShift;
+  int32_t MaxInput;
   void Dump(Print* pPrint);
 };
 // fixedPointFraction is often a 8.8 number
