@@ -13,7 +13,7 @@
 volatile int i, j;
 
 test(T9130FastMapInt_F2C_M40To212) {
-  FastMapInt mapper;
+  FastMapInt mapper(&Serial);
   mapper.init(-40, 212, -40, 100);
   mapper.Dump(&Serial);
   int fails = 0;
