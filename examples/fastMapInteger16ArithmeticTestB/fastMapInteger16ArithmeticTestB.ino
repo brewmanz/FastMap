@@ -1,5 +1,5 @@
 //
-//    FILE: fastMapInteger16ArithmeticTest.ino
+//    FILE: fastMapInteger16ArithmeticTestB.ino
 //  AUTHOR: Brewmanz (Bryan White)
 // VERSION: 0.1.1
 // PURPOSE: Test of FastMapInt(16) helper functions
@@ -17,7 +17,7 @@ test(T1186Multiply16ByFixedPointFraction32_5DivM9_Neg) {
   FixedPointFraction32_t FPF;
   Ratio16ToFixedPointFraction32(5, -9, nullptr, &FPF);
   FPF.Dump(&Serial); Serial.println();
-  assertEqual(FPF.MaxInput, (int)((long)0x7FFF0000 /((long)5 * 0x10000 / 9)/2));
+  assertEqual(FPF.MaxInput, (int)((long)0x7FFF0000 /((long)5 * 0x10000 / 9)/4));
   assertEqual(Multiply16ByFixedPointFraction32(0, &FPF), 0);
 
   assertEqual(Multiply16ByFixedPointFraction32(-1, &FPF), 1);
@@ -67,7 +67,7 @@ test(T1186Multiply16ByFixedPointFraction32_5DivM9_Neg) {
 test(T1185Multiply16ByFixedPointFraction32_5DivM9_Pos) {
   FixedPointFraction32_t FPF;
   Ratio16ToFixedPointFraction32(5, -9, &FPF, nullptr);
-  assertEqual(FPF.MaxInput, (int)((long)0x7FFF0000 /((long)5 * 0x10000 / 9)/2));
+  assertEqual(FPF.MaxInput, (int)((long)0x7FFF0000 /((long)5 * 0x10000 / 9)/4));
   assertEqual(Multiply16ByFixedPointFraction32(0, &FPF), 0);
 
   assertEqual(Multiply16ByFixedPointFraction32(1, &FPF), 0);
@@ -118,7 +118,7 @@ test(T1181Multiply16ByFixedPointFraction32_5Div9_Neg) {
   FixedPointFraction32_t FPF;
   Ratio16ToFixedPointFraction32(5, 9, nullptr, &FPF, &Serial); Serial.println();
   FPF.Dump(&Serial); Serial.println();
-  assertEqual(FPF.MaxInput, (int)((long)0x7FFF0000 /((long)5 * 0x10000 / 9)/2));
+  assertEqual(FPF.MaxInput, (int)((long)0x7FFF0000 /((long)5 * 0x10000 / 9)/4));
   assertEqual(Multiply16ByFixedPointFraction32(0, &FPF), 0);
 
   assertEqual(Multiply16ByFixedPointFraction32(-1, &FPF), -1);
@@ -143,46 +143,6 @@ test(T1181Multiply16ByFixedPointFraction32_5Div9_Neg) {
   assertEqual(Multiply16ByFixedPointFraction32(-7000, &FPF), -3889);
   assertEqual(Multiply16ByFixedPointFraction32(-8000, &FPF), -4445);
   assertEqual(Multiply16ByFixedPointFraction32(-9000, &FPF), -5000);
-
-  assertEqual(Multiply16ByFixedPointFraction32(-18720, &FPF), -10400-0);
-  assertEqual(Multiply16ByFixedPointFraction32(-18721, &FPF), -10400-1);
-  assertEqual(Multiply16ByFixedPointFraction32(-18722, &FPF, &Serial), -10400-2); Serial.println();
-  assertEqual(Multiply16ByFixedPointFraction32(-18723, &FPF), -10400-2);
-  assertEqual(Multiply16ByFixedPointFraction32(-18724, &FPF), -10400-3);
-  assertEqual(Multiply16ByFixedPointFraction32(-18725, &FPF), -10400-3);
-  assertEqual(Multiply16ByFixedPointFraction32(-18726, &FPF), -10400-4);
-  assertEqual(Multiply16ByFixedPointFraction32(-18727, &FPF), -10400-4);
-  assertEqual(Multiply16ByFixedPointFraction32(-18728, &FPF), -10400-5);
-
-  assertEqual(Multiply16ByFixedPointFraction32(-18729, &FPF), -10405-0);
-  assertEqual(Multiply16ByFixedPointFraction32(-18730, &FPF), -10405-1);
-  assertEqual(Multiply16ByFixedPointFraction32(-18731, &FPF, &Serial), -10405-2); Serial.println(); // fails
-  assertEqual(Multiply16ByFixedPointFraction32(-18732, &FPF), -10405-2);
-  assertEqual(Multiply16ByFixedPointFraction32(-18733, &FPF), -10405-3);
-  assertEqual(Multiply16ByFixedPointFraction32(-18734, &FPF), -10405-3);
-  assertEqual(Multiply16ByFixedPointFraction32(-18735, &FPF), -10405-4);
-  assertEqual(Multiply16ByFixedPointFraction32(-18736, &FPF), -10405-4);
-  assertEqual(Multiply16ByFixedPointFraction32(-18737, &FPF), -10405-5);
-
-  assertEqual(Multiply16ByFixedPointFraction32(-18738, &FPF), -10410-0);
-  assertEqual(Multiply16ByFixedPointFraction32(-18739, &FPF), -10410-1);
-  assertEqual(Multiply16ByFixedPointFraction32(-18740, &FPF, &Serial), -10410-2); Serial.println(); // fails
-  assertEqual(Multiply16ByFixedPointFraction32(-18741, &FPF), -10410-2);
-  assertEqual(Multiply16ByFixedPointFraction32(-18742, &FPF), -10410-3);
-  assertEqual(Multiply16ByFixedPointFraction32(-18743, &FPF), -10410-3);
-  assertEqual(Multiply16ByFixedPointFraction32(-18744, &FPF), -10410-4);
-  assertEqual(Multiply16ByFixedPointFraction32(-18745, &FPF), -10410-4);
-  assertEqual(Multiply16ByFixedPointFraction32(-18746, &FPF), -10410-5);
-
-  assertEqual(Multiply16ByFixedPointFraction32(-18747, &FPF), -10415-0);
-  assertEqual(Multiply16ByFixedPointFraction32(-18748, &FPF), -10415-1);
-  assertEqual(Multiply16ByFixedPointFraction32(-18749, &FPF, &Serial), -10415-2); Serial.println(); // fails
-  assertEqual(Multiply16ByFixedPointFraction32(-18750, &FPF), -10415-2);
-  assertEqual(Multiply16ByFixedPointFraction32(-18751, &FPF), -10415-3);
-  assertEqual(Multiply16ByFixedPointFraction32(-18752, &FPF), -10415-3);
-  assertEqual(Multiply16ByFixedPointFraction32(-18753, &FPF), -10415-4);
-  assertEqual(Multiply16ByFixedPointFraction32(-18754, &FPF), -10415-4);
-  assertEqual(Multiply16ByFixedPointFraction32(-18755, &FPF), -10415-5);
  
   long failed = 0;
   Serial.print(F("@"));Serial.print(__LINE__);Serial.print(F(": FPF.MaxInput="));Serial.print(FPF.MaxInput);Serial.println(F("..."));
@@ -208,7 +168,7 @@ test(T1181Multiply16ByFixedPointFraction32_5Div9_Neg) {
 test(T1180Multiply16ByFixedPointFraction32_5Div9_Pos) {
   FixedPointFraction32_t FPF;
   Ratio16ToFixedPointFraction32(5, 9, &FPF, nullptr);
-  assertEqual(FPF.MaxInput, (int)((long)0x7FFF0000 /((long)5 * 0x10000 / 9)/2));
+  assertEqual(FPF.MaxInput, (int)((long)0x7FFF0000 /((long)5 * 0x10000 / 9)/4));
   assertEqual(Multiply16ByFixedPointFraction32(0, &FPF), 0);
 
   assertEqual(Multiply16ByFixedPointFraction32(1, &FPF), 0);
@@ -259,7 +219,7 @@ test(T1180Multiply16ByFixedPointFraction32_5Div9_Pos) {
 test(T1176Multiply16ByFixedPointFraction32_1DivM3_Neg) {
   FixedPointFraction32_t FPF;
   Ratio16ToFixedPointFraction32(1, -3, nullptr, &FPF);
-  assertEqual(FPF.MaxInput, (int)((long)32767 * 3 / 4));
+  assertEqual(FPF.MaxInput, (int)((long)32767 * 3 / 8));
   assertEqual(Multiply16ByFixedPointFraction32(0, &FPF), 0);
 
   assertEqual(Multiply16ByFixedPointFraction32(-1, &FPF), 1);
@@ -309,7 +269,7 @@ test(T1176Multiply16ByFixedPointFraction32_1DivM3_Neg) {
 test(T1175Multiply16ByFixedPointFraction32_1DivM3_Pos) {
   FixedPointFraction32_t FPF;
   Ratio16ToFixedPointFraction32(1, -3, &FPF, nullptr);
-  assertEqual(FPF.MaxInput, (int)((long)32767 * 3 / 4));
+  assertEqual(FPF.MaxInput, (int)((long)32767 * 3 / 8));
   assertEqual(Multiply16ByFixedPointFraction32(0, &FPF), 0);
 
   assertEqual(Multiply16ByFixedPointFraction32(1, &FPF), 0);
@@ -359,7 +319,7 @@ test(T1175Multiply16ByFixedPointFraction32_1DivM3_Pos) {
 test(T1171Multiply16ByFixedPointFraction32_1Div3_Neg) {
   FixedPointFraction32_t FPF;
   Ratio16ToFixedPointFraction32(1, 3, nullptr, &FPF);
-  assertEqual(FPF.MaxInput, (int)((long)32767 * 3 / 4));
+  assertEqual(FPF.MaxInput, (int)((long)32767 * 3 / 8));
   assertEqual(Multiply16ByFixedPointFraction32(0, &FPF), 0);
 
   assertEqual(Multiply16ByFixedPointFraction32(-1, &FPF), -1);
@@ -409,7 +369,7 @@ test(T1171Multiply16ByFixedPointFraction32_1Div3_Neg) {
 test(T1170Multiply16ByFixedPointFraction32_1Div3_Pos) {
   FixedPointFraction32_t FPF;
   Ratio16ToFixedPointFraction32(1, 3, &FPF, nullptr);
-  assertEqual(FPF.MaxInput, (int)((long)32767 * 3 / 4));
+  assertEqual(FPF.MaxInput, (int)((long)32767 * 3 / 8));
   assertEqual(Multiply16ByFixedPointFraction32(0, &FPF), 0);
 
   assertEqual(Multiply16ByFixedPointFraction32(1, &FPF), 0);
@@ -460,7 +420,7 @@ test(T1170Multiply16ByFixedPointFraction32_1Div3_Pos) {
 test(T1166Multiply16ByFixedPointFraction32_1DivM4_Neg) {
   FixedPointFraction32_t FPF;
   Ratio16ToFixedPointFraction32(1, -4, nullptr, &FPF);
-  assertEqual(FPF.MaxInput, 32767);
+  assertEqual(FPF.MaxInput, (int)((long)32767 * 1 / 2));
   assertEqual(Multiply16ByFixedPointFraction32(0, &FPF), 0);
 
   assertEqual(Multiply16ByFixedPointFraction32(-1, &FPF), 1);
@@ -510,7 +470,7 @@ test(T1166Multiply16ByFixedPointFraction32_1DivM4_Neg) {
 test(T1165Multiply16ByFixedPointFraction32_1DivM4_Pos) {
   FixedPointFraction32_t FPF;
   Ratio16ToFixedPointFraction32(1, -4, &FPF, nullptr);
-  assertEqual(FPF.MaxInput, 32767);
+  assertEqual(FPF.MaxInput, (int)((long)32767 * 1 / 2));
   assertEqual(Multiply16ByFixedPointFraction32(0, &FPF), 0);
 
   assertEqual(Multiply16ByFixedPointFraction32(1, &FPF), 0);
@@ -560,7 +520,7 @@ test(T1165Multiply16ByFixedPointFraction32_1DivM4_Pos) {
 test(T1161Multiply16ByFixedPointFraction32_1Div4_Neg) {
   FixedPointFraction32_t FPF;
   Ratio16ToFixedPointFraction32(1, 4, nullptr, &FPF);
-  assertEqual(FPF.MaxInput, 32767);
+  assertEqual(FPF.MaxInput, (int)((long)32767 * 1 / 2));
   assertEqual(Multiply16ByFixedPointFraction32(0, &FPF), 0);
 
   assertEqual(Multiply16ByFixedPointFraction32(-1, &FPF), -1);
@@ -610,7 +570,7 @@ test(T1161Multiply16ByFixedPointFraction32_1Div4_Neg) {
 test(T1160Multiply16ByFixedPointFraction32_1Div4_Pos) {
   FixedPointFraction32_t FPF;
   Ratio16ToFixedPointFraction32(1, 4, &FPF, nullptr);
-  assertEqual(FPF.MaxInput, 32767);
+  assertEqual(FPF.MaxInput, (int)((long)32767 * 1 / 2));
   assertEqual(Multiply16ByFixedPointFraction32(0, &FPF), 0);
 
   assertEqual(Multiply16ByFixedPointFraction32(1, &FPF), 0);

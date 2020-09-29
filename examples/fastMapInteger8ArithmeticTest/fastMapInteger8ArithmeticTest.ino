@@ -369,8 +369,8 @@ test(T1100Ratio8ToFixedPointFraction16) {
   // handling of 0
   Ratio8ToFixedPointFraction16(0, 0, &fpfP, &fpfN, pPrintDebug);
   if(pPrintDebug) { pPrintDebug->println(); }
-  assertEqual(fpfP.TheFraction, (int16_t)0b0);
-  assertEqual(fpfN.TheFraction, (int16_t)0b0);
+  assertEqual(fpfP.TheFraction, (int16_t)0b00 * 0x100 + 0B00000000);
+  assertEqual(fpfN.TheFraction, (int16_t)0b00 * 0x100 + 0B00000000);
   assertEqual(fpfP.BitsToShift, 0);
   assertEqual(fpfN.BitsToShift, 0);
   assertEqual(fpfP.MaxInput, 0);
@@ -378,8 +378,8 @@ test(T1100Ratio8ToFixedPointFraction16) {
 
   Ratio8ToFixedPointFraction16(0, 8, &fpfP, &fpfN, pPrintDebug);
   if(pPrintDebug) { pPrintDebug->println(); }
-  assertEqual(fpfP.TheFraction, (int16_t)0b0);
-  assertEqual(fpfN.TheFraction, (int16_t)0b0);
+  assertEqual(fpfP.TheFraction, (int16_t)0b00 * 0x100 + 0B00000000);
+  assertEqual(fpfN.TheFraction, (int16_t)0b00 * 0x100 + 0B00000000);
   assertEqual(fpfP.BitsToShift, 0);
   assertEqual(fpfN.BitsToShift, 0);
   assertEqual(fpfP.MaxInput, 0);
@@ -387,8 +387,8 @@ test(T1100Ratio8ToFixedPointFraction16) {
 
   Ratio8ToFixedPointFraction16(8, 0, &fpfP, &fpfN, pPrintDebug);
   if(pPrintDebug) { pPrintDebug->println(); }
-  assertEqual(fpfP.TheFraction, (int16_t)0b0);
-  assertEqual(fpfN.TheFraction, (int16_t)0b0);
+  assertEqual(fpfP.TheFraction, (int16_t)0b00 * 0x100 + 0B00000000);
+  assertEqual(fpfN.TheFraction, (int16_t)0b00 * 0x100 + 0B00000000);
   assertEqual(fpfP.BitsToShift, 0);
   assertEqual(fpfN.BitsToShift, 0);
   assertEqual(fpfP.MaxInput, 0);
