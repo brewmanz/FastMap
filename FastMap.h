@@ -75,13 +75,13 @@ struct FixedPointFraction64_t {
   int32_t MaxInput;
   void Dump(Print* pPrint);
 };
-// fixedPointFraction is often a 8.8 number (check its BitsToShift)
+// fixedPointFraction is often a 6.10 number (check its BitsToShift)
 int8_t Multiply8ByFixedPointFraction16(int8_t factor, const FixedPointFraction16_t* pFixedPointFraction, Print* pPrintDebug = nullptr);
-// fixedPointFraction is often a 16.16 number (check its BitsToShift)
+// fixedPointFraction is often a 14.18 number (check its BitsToShift)
 int16_t Multiply16ByFixedPointFraction32(int16_t factor, const FixedPointFraction32_t* pFixedPointFraction, Print* pPrintDebug = nullptr);
-// fixedPointFraction is often a 32.32 number (check its BitsToShift)
+// fixedPointFraction is often a 30.34 number (check its BitsToShift)
 int32_t Multiply32ByFixedPointFraction64(int32_t factor, const FixedPointFraction64_t* pFixedPointFraction, Print* pPrintDebug = nullptr);
-// COMPROMISE until int128_t defined // fixedPointFraction is often a 32.32 number (check its BitsToShift)
+// COMPROMISE until int128_t defined // fixedPointFraction is often a 30.34 number (check its BitsToShift)
 int64_t Multiply64ByFixedPointFraction64(int64_t factor, const FixedPointFraction64_t* pFixedPointFraction, Print* pPrintDebug = nullptr);
 
 // we need two fractions, depending on whether we're multiplying a +ve or -ve factor later

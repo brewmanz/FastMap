@@ -118,7 +118,7 @@ void FixedPointFraction32_t::Dump(Print* pPrint){
 }
 void FixedPointFraction64_t::Dump(Print* pPrint){
   pPrint->print(F("FixedPointFraction64_t Dump:<"));
-  pPrint->print(F("F:=0x"));pPrint->print((int32_t)(TheFraction / 0x1000000000000), HEX);pPrint->print(F(" "));pPrint->print((int32_t)(TheFraction % 0x1000000000000), HEX);
+  pPrint->print(F("F:=0x"));pPrint->print((int32_t)(TheFraction / 0x100000000), HEX);pPrint->print(F(" "));pPrint->print((int32_t)(TheFraction % 0x100000000), HEX);
   pPrint->print(F(", B:"));pPrint->print(BitsToShift, DEC);
   pPrint->print(F(", Mx:"));pPrint->print(MaxInput, DEC);
   pPrint->print(F(">"));
@@ -371,14 +371,14 @@ void Ratio8ToFixedPointFraction16(int8_t numerator, int8_t denominator, FixedPoi
     maxInput = abs(0x7F00 / lookAhead);
     if(pPrintDebug) { pPrintDebug->print(F(",lA=x"));pPrintDebug->print(lookAhead, HEX);pPrintDebug->print(F(", mI="));pPrintDebug->print(maxInput);}
 
-    // ensure TheFraction is between 0x100 & 0x1FF incl
-    while(abs(lookAhead) < 0x100) {
+    // ensure TheFraction is between 0x200 & 0x3FF incl (between 0x100 & 01FF occasionally gave rounding failure)
+    while(abs(lookAhead) < 0x200) {
       if(pPrintDebug) { pPrintDebug->print(F(",SL")); }
       lookAhead <<= 1;
       maxInput >>= 1;
       ++resP.BitsToShift;
     }
-    while(abs(lookAhead) > 0x1FF) {
+    while(abs(lookAhead) > 0x3FF) {
       if(pPrintDebug) { pPrintDebug->print(F(",SR")); }
       lookAhead >>= 1;
       --resP.BitsToShift;
@@ -419,14 +419,14 @@ void Ratio16ToFixedPointFraction32(int16_t numerator, int16_t denominator, Fixed
     maxInput = abs(0x7FFF0000 / lookAhead);
     if(pPrintDebug) { pPrintDebug->print(F(",lA=x"));pPrintDebug->print(lookAhead, HEX);pPrintDebug->print(F(", mI="));pPrintDebug->print(maxInput);}
 
-    // ensure TheFraction is between 0x10000 & 0x1FFFF incl
-    while(abs(lookAhead) < 0x10000) {
+    // ensure TheFraction is between 0x20000 & 0x3FFFF incl (between 0x100 & 01FF occasionally gave rounding failure)
+    while(abs(lookAhead) < 0x20000) {
       if(pPrintDebug) { pPrintDebug->print(F(",SL")); }
       lookAhead <<= 1;
       maxInput >>= 1;
       ++resP.BitsToShift;
     }
-    while(abs(lookAhead) > 0x1FFFF) {
+    while(abs(lookAhead) > 0x3FFFF) {
       if(pPrintDebug) { pPrintDebug->print(F(",SR")); }
       lookAhead >>= 1;
       --resP.BitsToShift;
@@ -467,14 +467,14 @@ void Ratio32ToFixedPointFraction64(int32_t numerator, int32_t denominator, Fixed
     maxInput = abs(0x7FFFFFFF00000000 / lookAhead);
     if(pPrintDebug) { pPrintDebug->print(F(",lA=x"));pPrintDebug->print((long)lookAhead, HEX);pPrintDebug->print(F(", mI="));pPrintDebug->print((long)maxInput);}
 
-    // ensure TheFraction is between 0x100000000 & 0x1FFFFFFFF incl
-    while(abs(lookAhead) < 0x100000000) {
+    // ensure TheFraction is between 0x200000000 & 0x3FFFFFFFF incl (between 0x100 & 01FF occasionally gave rounding failure)
+    while(abs(lookAhead) < 0x200000000) {
       if(pPrintDebug) { pPrintDebug->print(F(",SL")); }
       lookAhead <<= 1;
       maxInput >>= 1;
       ++resP.BitsToShift;
     }
-    while(abs(lookAhead) > 0x1FFFFFFFF) {
+    while(abs(lookAhead) > 0x3FFFFFFFF) {
       if(pPrintDebug) { pPrintDebug->print(F(",SR")); }
       lookAhead >>= 1;
       --resP.BitsToShift;
@@ -516,14 +516,14 @@ void Ratio64ToFixedPointFraction64(int64_t numerator, int64_t denominator, Fixed
     maxInput = abs(0x7FFFFFFF00000000 / lookAhead);
     if(pPrintDebug) { pPrintDebug->print(F(",lA=x"));pPrintDebug->print((long)lookAhead, HEX);pPrintDebug->print(F(", mI="));pPrintDebug->print((long)maxInput);}
 
-    // ensure TheFraction is between 0x100000000 & 0x1FFFFFFFF incl
-    while(abs(lookAhead) < 0x100000000) {
+    // ensure TheFraction is between 0x200000000 & 0x3FFFFFFFF incl (between 0x100 & 01FF occasionally gave rounding failure)
+    while(abs(lookAhead) < 0x200000000) {
       if(pPrintDebug) { pPrintDebug->print(F(",SL")); }
       lookAhead <<= 1;
       maxInput >>= 1;
       ++resP.BitsToShift;
     }
-    while(abs(lookAhead) > 0x1FFFFFFFF) {
+    while(abs(lookAhead) > 0x3FFFFFFFF) {
       if(pPrintDebug) { pPrintDebug->print(F(",SR")); }
       lookAhead >>= 1;
       --resP.BitsToShift;
