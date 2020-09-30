@@ -14,7 +14,7 @@ volatile int i, j;
 
 test(T1150Ratio16ToFixedPointFraction32) {
   FixedPointFraction32_t  fpfP, fpfN;
-#if FULL_DEBUG || 1
+#if FULL_DEBUG
   Print* pPrintDebug = &Serial;
 #else
   Print* pPrintDebug = nullptr;

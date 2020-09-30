@@ -1,5 +1,5 @@
 //
-//    FILE: fastMapInteger32ArithmeticTest.ino
+//    FILE: fastMapInteger32ArithmeticTestB.ino
 //  AUTHOR: Brewmanz (Bryan White)
 // VERSION: 0.1.1
 // PURPOSE: Test of FastMapInt(32) helper functions
@@ -11,6 +11,7 @@
 #include <FastMap.h>
 
 //volatile int i, j;
+const char* spinner[] = {"\b|", "\b/", "\b-", "\b\\" };
 
 test(T1236Multiply32ByFixedPointFraction64_5DivM9_Neg) {
   FixedPointFraction64_t FPF;
@@ -44,7 +45,7 @@ test(T1236Multiply32ByFixedPointFraction64_5DivM9_Neg) {
 
   long failed = 0;
   for(int32_t ix = 0; ix > INT32_MIN / 4000; --ix){
-    if(ix % 10240 == 0) { Serial.print(F(".")); }
+    if(ix%1024 == 0) { Serial.print(spinner[abs((ix/1024)%4)]); }
     int32_t expVal = -(((ix * 5L) - 8) / 9);
     int32_t actVal = Multiply32ByFixedPointFraction64(ix, &FPF);
     if(expVal != actVal){
@@ -58,6 +59,7 @@ test(T1236Multiply32ByFixedPointFraction64_5DivM9_Neg) {
       }
     }
   }
+  Serial.println();
   assertEqual(failed, 0L);
 }
 test(T1235Multiply32ByFixedPointFraction64_5DivM9_Pos) {
@@ -92,7 +94,7 @@ test(T1235Multiply32ByFixedPointFraction64_5DivM9_Pos) {
 
   long failed = 0;
   for(int32_t ix = 0; ix < INT32_MAX / 4000; ++ix){
-    if(ix % 10240 == 0) { Serial.print(F(".")); }
+    if(ix%1024 == 0) { Serial.print(spinner[abs((ix/1024)%4)]); }
     int32_t expVal = -(((ix * 5L) - 0) / 9);
     int32_t actVal = Multiply32ByFixedPointFraction64(ix, &FPF);
     if(expVal != actVal){
@@ -106,6 +108,7 @@ test(T1235Multiply32ByFixedPointFraction64_5DivM9_Pos) {
       }
     }
   }
+  Serial.println();
   assertEqual(failed, 0L);
 }
 test(T1231Multiply32ByFixedPointFraction64_5Div9_Neg) {
@@ -140,7 +143,7 @@ test(T1231Multiply32ByFixedPointFraction64_5Div9_Neg) {
 
   long failed = 0;
   for(int32_t ix = 0; ix > INT32_MIN / 4000; --ix){
-    if(ix % 10240 == 0) { Serial.print(F(".")); }
+    if(ix%1024 == 0) { Serial.print(spinner[abs((ix/1024)%4)]); }
     int32_t expVal = (((ix * 5L) - 8) / 9);
     int32_t actVal = Multiply32ByFixedPointFraction64(ix, &FPF);
     if(expVal != actVal){
@@ -154,6 +157,7 @@ test(T1231Multiply32ByFixedPointFraction64_5Div9_Neg) {
       }
     }
   }
+  Serial.println();
   assertEqual(failed, 0L);
 }
 test(T1230Multiply32ByFixedPointFraction64_5Div9_Pos) {
@@ -188,7 +192,7 @@ test(T1230Multiply32ByFixedPointFraction64_5Div9_Pos) {
 
   long failed = 0;
   for(int32_t ix = 0; ix < INT32_MAX / 4000; ++ix){
-    if(ix % 10240 == 0) { Serial.print(F(".")); }
+    if(ix%1024 == 0) { Serial.print(spinner[abs((ix/1024)%4)]); }
     int32_t expVal = (((ix * 5L) - 0) / 9);
     int32_t actVal = Multiply32ByFixedPointFraction64(ix, &FPF);
     if(expVal != actVal){
@@ -202,6 +206,7 @@ test(T1230Multiply32ByFixedPointFraction64_5Div9_Pos) {
       }
     }
   }
+  Serial.println();
   assertEqual(failed, 0L);
 }
 
@@ -237,7 +242,7 @@ test(T1226Multiply32ByFixedPointFraction64_1DivM3_Neg) {
 
   long failed = 0;
   for(int32_t ix = 0; ix > INT32_MIN / 4000; --ix){
-    if(ix % 10240 == 0) { Serial.print(F(".")); }
+    if(ix%1024 == 0) { Serial.print(spinner[abs((ix/1024)%4)]); }
     int32_t expVal = -(((ix * 1L) - 2) / 3);
     int32_t actVal = Multiply32ByFixedPointFraction64(ix, &FPF);
     if(expVal != actVal){
@@ -251,6 +256,7 @@ test(T1226Multiply32ByFixedPointFraction64_1DivM3_Neg) {
       }
     }
   }
+  Serial.println();
   assertEqual(failed, 0L);
 }
 test(T1225Multiply32ByFixedPointFraction64_1DivM3_Pos) {
@@ -285,7 +291,7 @@ test(T1225Multiply32ByFixedPointFraction64_1DivM3_Pos) {
 
   long failed = 0;
   for(int32_t ix = 0; ix < INT32_MAX / 4000; ++ix){
-    if(ix % 10240 == 0) { Serial.print(F(".")); }
+    if(ix%1024 == 0) { Serial.print(spinner[abs((ix/1024)%4)]); }
     int32_t expVal = -(((ix * 1L) - 0) / 3);
     int32_t actVal = Multiply32ByFixedPointFraction64(ix, &FPF);
     if(expVal != actVal){
@@ -299,6 +305,7 @@ test(T1225Multiply32ByFixedPointFraction64_1DivM3_Pos) {
       }
     }
   }
+  Serial.println();
   assertEqual(failed, 0L);
 }
 test(T1221Multiply32ByFixedPointFraction64_1Div3_Neg) {
@@ -333,7 +340,7 @@ test(T1221Multiply32ByFixedPointFraction64_1Div3_Neg) {
 
   long failed = 0;
   for(int32_t ix = 0; ix > INT32_MIN / 4000; --ix){
-    if(ix % 10240 == 0) { Serial.print(F(".")); }
+    if(ix%1024 == 0) { Serial.print(spinner[abs((ix/1024)%4)]); }
     int32_t expVal = (((ix * 1L) - 2) / 3);
     int32_t actVal = Multiply32ByFixedPointFraction64(ix, &FPF);
     if(expVal != actVal){
@@ -347,6 +354,7 @@ test(T1221Multiply32ByFixedPointFraction64_1Div3_Neg) {
       }
     }
   }
+  Serial.println();
   assertEqual(failed, 0L);
 }
 test(T1220Multiply32ByFixedPointFraction64_1Div3_Pos) {
@@ -381,7 +389,7 @@ test(T1220Multiply32ByFixedPointFraction64_1Div3_Pos) {
 
   long failed = 0;
   for(int32_t ix = 0; ix < INT32_MAX / 4000; ++ix){
-    if(ix % 10240 == 0) { Serial.print(F(".")); }
+    if(ix%1024 == 0) { Serial.print(spinner[abs((ix/1024)%4)]); }
     int32_t expVal = (((ix * 1L) - 0) / 3);
     int32_t actVal = Multiply32ByFixedPointFraction64(ix, &FPF);
     if(expVal != actVal){
@@ -395,6 +403,7 @@ test(T1220Multiply32ByFixedPointFraction64_1Div3_Pos) {
       }
     }
   }
+  Serial.println();
   assertEqual(failed, 0L);
 }
 
@@ -430,7 +439,7 @@ test(T1216Multiply32ByFixedPointFraction64_1DivM4_Neg) {
 
   long failed = 0;
   for(int32_t ix = 0; ix > INT32_MIN / 4000; --ix){
-    if(ix % 10240 == 0) { Serial.print(F(".")); }
+    if(ix%1024 == 0) { Serial.print(spinner[abs((ix/1024)%4)]); }
     int32_t expVal = -(((ix * 1L) - 3) / 4);
     int32_t actVal = Multiply32ByFixedPointFraction64(ix, &FPF);
     if(expVal != actVal){
@@ -444,6 +453,7 @@ test(T1216Multiply32ByFixedPointFraction64_1DivM4_Neg) {
       }
     }
   }
+  Serial.println();
   assertEqual(failed, 0L);
 }
 test(T1215Multiply32ByFixedPointFraction64_1DivM4_Pos) {
@@ -478,7 +488,7 @@ test(T1215Multiply32ByFixedPointFraction64_1DivM4_Pos) {
 
   long failed = 0;
   for(int32_t ix = 0; ix < INT32_MAX / 4000; ++ix){
-    if(ix % 10240 == 0) { Serial.print(F(".")); }
+    if(ix%1024 == 0) { Serial.print(spinner[abs((ix/1024)%4)]); }
     int32_t expVal = -(((ix * 1L) - 0) / 4);
     int32_t actVal = Multiply32ByFixedPointFraction64(ix, &FPF);
     if(expVal != actVal){
@@ -492,6 +502,7 @@ test(T1215Multiply32ByFixedPointFraction64_1DivM4_Pos) {
       }
     }
   }
+  Serial.println();
   assertEqual(failed, 0L);
 }
 test(T1211Multiply32ByFixedPointFraction64_1Div4_Neg) {
@@ -526,7 +537,7 @@ test(T1211Multiply32ByFixedPointFraction64_1Div4_Neg) {
 
   long failed = 0;
   for(int32_t ix = 0; ix > INT32_MIN / 4000; --ix){
-    if(ix % 10240 == 0) { Serial.print(F(".")); }
+    if(ix%1024 == 0) { Serial.print(spinner[abs((ix/1024)%4)]); }
     int32_t expVal = (((ix * 1L) - 3) / 4);
     int32_t actVal = Multiply32ByFixedPointFraction64(ix, &FPF);
     if(expVal != actVal){
@@ -540,6 +551,7 @@ test(T1211Multiply32ByFixedPointFraction64_1Div4_Neg) {
       }
     }
   }
+  Serial.println();
   assertEqual(failed, 0L);
 }
 test(T1210Multiply32ByFixedPointFraction64_1Div4_Pos) {
@@ -574,7 +586,7 @@ test(T1210Multiply32ByFixedPointFraction64_1Div4_Pos) {
 
   long failed = 0;
   for(int32_t ix = 0; ix < INT32_MAX / 4000; ++ix){
-    if(ix % 10240 == 0) { Serial.print(F(".")); }
+    if(ix%1024 == 0) { Serial.print(spinner[abs((ix/1024)%4)]); }
     int32_t expVal = (((ix * 1L) - 0) / 4);
     int32_t actVal = Multiply32ByFixedPointFraction64(ix, &FPF);
     if(expVal != actVal){
@@ -588,235 +600,8 @@ test(T1210Multiply32ByFixedPointFraction64_1Div4_Pos) {
       }
     }
   }
+  Serial.println();
   assertEqual(failed, 0L);
-}
-
-test(T1200Ratio32ToFixedPointFraction64) {
-  FixedPointFraction64_t fpfP, fpfN;
-
-  // handling of 0
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(0, 0, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)0 * 0x100000000 + 0x0000);
-  assertEqual(fpfN.TheFraction, (int64_t)0 * 0x100000000 + 0x0000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(0, 8, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)0 * 0x100000000 + 0x0000);
-  assertEqual(fpfN.TheFraction, (int64_t)0 * 0x100000000 + 0x0000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(8, 0, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)0 * 0x100000000 + 0x0000);
-  assertEqual(fpfN.TheFraction, (int64_t)0 * 0x100000000 + 0x0000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  // equal ratios
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(1, 1, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)1 * 0x100000000 + 0x0000);
-  assertEqual(fpfN.TheFraction, (int64_t)1 * 0x100000000 + 0x0000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(12, 12, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)1 * 0x100000000 + 0x0000);
-  assertEqual(fpfN.TheFraction, (int64_t)1 * 0x100000000 + 0x0000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(-2, 2, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)-1 * 0x100000000 + 0x0000);
-  assertEqual(fpfN.TheFraction, (int64_t)-1 * 0x100000000 + 0x0000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(3, -3, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)-1 * 0x100000000 + 0x0000);
-  assertEqual(fpfN.TheFraction, (int64_t)-1 * 0x100000000 + 0x0000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(-4, -4, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)1 * 0x100000000 + 0x0000);
-  assertEqual(fpfN.TheFraction, (int64_t)1 * 0x100000000 + 0x0000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  // exact ratios
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(8, 2, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)4 * 0x100000000 + 0x0000);
-  assertEqual(fpfN.TheFraction, (int64_t)4 * 0x100000000 + 0x0000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(-12, 4, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)-3 * 0x100000000 + 0x0000);
-  assertEqual(fpfN.TheFraction, (int64_t)-3 * 0x100000000 + 0x0000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(30, -5, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)-6 * 0x100000000 + 0x0000);
-  assertEqual(fpfN.TheFraction, (int64_t)-6 * 0x100000000 + 0x0000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(-56, -7, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)8 * 0x100000000 + 0x0000);
-  assertEqual(fpfN.TheFraction, (int64_t)8 * 0x100000000 + 0x0000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  // theoretical exact ratios
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(1, 3, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)0 * 0x100000000 + 0x55555556);
-  assertEqual(fpfN.TheFraction, (int64_t)0 * 0x100000000 + 0x55555555);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(-1, 3, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)-1 * 0x100000000 + 0xAAAAAAAA);
-  assertEqual(fpfN.TheFraction, (int64_t)-1 * 0x100000000 + 0xAAAAAAAB);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(1, -3, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)-1 * 0x100000000 + 0xAAAAAAAA);
-  assertEqual(fpfN.TheFraction, (int64_t)-1 * 0x100000000 + 0xAAAAAAAB);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(-1, -3, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)0 * 0x100000000 + 0x55555556);
-  assertEqual(fpfN.TheFraction, (int64_t)0 * 0x100000000 + 0x55555555);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(2, 3, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)0 * 0x100000000 + 0xAAAAAAAB);
-  assertEqual(fpfN.TheFraction, (int64_t)0 * 0x100000000 + 0xAAAAAAAA);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(-2, 3, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)-1 * 0x100000000 + 0x55555555);
-  assertEqual(fpfN.TheFraction, (int64_t)-1 * 0x100000000 + 0x55555556);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(2, -3, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)-1 * 0x100000000 + 0x55555555);
-  assertEqual(fpfN.TheFraction, (int64_t)-1 * 0x100000000 + 0x55555556);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(-2, -3, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)0 * 0x100000000 + 0xAAAAAAAB);
-  assertEqual(fpfN.TheFraction, (int64_t)0 * 0x100000000 + 0xAAAAAAAA);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  // binary fraction
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(1, 2, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)0 * 0x100000000 + 0x80000000);
-  assertEqual(fpfN.TheFraction, (int64_t)0 * 0x100000000 + 0x80000000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(-3, 4, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)-1 * 0x100000000 + 0x40000000);
-  assertEqual(fpfN.TheFraction, (int64_t)-1 * 0x100000000 + 0x40000000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(3, -8, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)-1 * 0x100000000 + 0xA0000000);
-  assertEqual(fpfN.TheFraction, (int64_t)-1 * 0x100000000 + 0xA0000000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(-3, -16, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)0 * 0x100000000 + 0x30000000);
-  assertEqual(fpfN.TheFraction, (int64_t)0 * 0x100000000 + 0x30000000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  // binary vulgar fraction
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(3, 2, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)1 * 0x100000000 + 0x80000000);
-  assertEqual(fpfN.TheFraction, (int64_t)1 * 0x100000000 + 0x80000000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(-7, 4, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)-2 * 0x100000000 + 0x40000000);
-  assertEqual(fpfN.TheFraction, (int64_t)-2 * 0x100000000 + 0x40000000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(11, -8, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)-2 * 0x100000000 + 0xA0000000);
-  assertEqual(fpfN.TheFraction, (int64_t)-2 * 0x100000000 + 0xA0000000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(-19, -16, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)1 * 0x100000000 + 0x30000000);
-  assertEqual(fpfN.TheFraction, (int64_t)1 * 0x100000000 + 0x30000000);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  // inexact fraction
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(5, 9, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)0 * 0x100000000 + 0x8E38E38F); // 32 = 0x8E39
-  assertEqual(fpfN.TheFraction, (int64_t)0 * 0x100000000 + 0x8E38E38E); // 32 = 0x8E38
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(-5, 9, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)-1 * 0x100000000 + 0x71C71C71); // 32 = 0x71C7
-  assertEqual(fpfN.TheFraction, (int64_t)-1 * 0x100000000 + 0x71C71C72); // 32 = 0x71C8
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(5, -9, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)-1 * 0x100000000 + 0x71C71C71);
-  assertEqual(fpfN.TheFraction, (int64_t)-1 * 0x100000000 + 0x71C71C72);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(-5, -9, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)0 * 0x100000000 + 0x8E38E38F);
-  assertEqual(fpfN.TheFraction, (int64_t)0 * 0x100000000 + 0x8E38E38E);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  // inexact vulgar fraction
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(9, 5, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)1 * 0x100000000 + 0xCCCCCCCD);
-  assertEqual(fpfN.TheFraction, (int64_t)1 * 0x100000000 + 0xCCCCCCCC);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(-9, 5, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)-2 * 0x100000000 + 0x33333333);
-  assertEqual(fpfN.TheFraction, (int64_t)-2 * 0x100000000 + 0x33333334);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(9, -5, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)-2 * 0x100000000 + 0x33333333);
-  assertEqual(fpfN.TheFraction, (int64_t)-2 * 0x100000000 + 0x33333334);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
-
-  fpfP = fpfN = {-2468, 97}; Ratio32ToFixedPointFraction64(-9, -5, &fpfP, &fpfN);
-  assertEqual(fpfP.TheFraction, (int64_t)1 * 0x100000000 + 0xCCCCCCCD);
-  assertEqual(fpfN.TheFraction, (int64_t)1 * 0x100000000 + 0xCCCCCCCC);
-  assertEqual(fpfP.BitsToShift, 32);
-  assertEqual(fpfN.BitsToShift, 32);
 }
 
 void setup() {
